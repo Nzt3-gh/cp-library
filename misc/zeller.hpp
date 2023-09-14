@@ -1,3 +1,7 @@
+/*
+年(Y)月(M)日(D) から曜日を求める
+0: Sat, 1: Sun, 2: Mon, 3: Tus, 4:Wed, 5: Thu, 6: Fri
+*/
 namespace Lib{
   int get_day(int Y,int M,int D){
     if(M<=2)Y-=1,M+=12;
