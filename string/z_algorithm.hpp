@@ -1,6 +1,5 @@
 #include"../template/template.hpp"
 
-
 /*
 verified https://judge.yosupo.jp/submission/161223
 vector の longest common prefix を求める
