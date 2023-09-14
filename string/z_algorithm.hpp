@@ -1,5 +1,11 @@
 #include"../template/template.hpp"
 
+
+/*
+verified https://judge.yosupo.jp/submission/161223
+vector の longest common prefix を求める
+*/
+
 template<class T>
 vector<int> z_algorithm(const vector<T>& A){
   int n=A.size();
