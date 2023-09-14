@@ -1,5 +1,9 @@
 #include"../template/template.hpp"
 
+/*
+文字 i を中心とした最長回文の半径を求める
+*/
+
 namespace Lib{
   template<class T>
   vector<int> get_palindrome(const vector<T>& A){
