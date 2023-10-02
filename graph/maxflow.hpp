@@ -13,10 +13,8 @@ namespace Lib{
     vector<array<int,2>> pos;
     vector<vector<_edge>> graph;
     unsigned v_size;
-    mf_graph (int n){
-      graph.resize(n);
-      v_size=n;
-    }
+    mf_graph (int n):
+      graph(n),v_size(n){}
     void add_edge(int from,int to,ll cap){
       pos.push_back({from,(int)graph[from].size()});
       graph[from].push_back(_edge({to,(int)graph[to].size(),cap}));

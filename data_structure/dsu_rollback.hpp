@@ -10,9 +10,8 @@ namespace Lib{
   struct DSU{
     vector<int>par,sz;
     stack<array<int,3>>his;
-    DSU(int n){
-      par.resize(n);
-      sz.resize(n);
+    DSU(int n):
+      par(n),sz(n){
       fill(par.begin(),par.end(),-1);
       fill(sz.begin(),sz.end(),1);
     }

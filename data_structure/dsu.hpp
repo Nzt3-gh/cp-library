@@ -8,9 +8,8 @@ Disjoint Set Union
 namespace Lib{
   struct DSU{
     vector<int>par,sz;
-    DSU(int n){
-      par.resize(n);
-      sz.resize(n);
+    DSU(int n):
+      par(n),sz(n){
       fill(par.begin(),par.end(),-1);
       fill(sz.begin(),sz.end(),1);
     }
