@@ -1,5 +1,12 @@
 #include"../template/template.hpp"
 
+/*
+Dinic法により最大流を求める
+add_edge(from,to,cap) from->to に 容量capの有向辺を追加する
+flow(s,t) s->t 最大流を求める
+edges() 全ての辺を (from,to,cap,flow) の形で得る
+*/
+
 namespace Lib{
   struct mf_graph{
     struct _edge{
