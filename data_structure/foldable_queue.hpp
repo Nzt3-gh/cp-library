@@ -85,6 +85,7 @@ struct foldable_queue {
     }
     return ret;
   }
+  size_t size() { return f_st_P.size() + b_st_P.size(); }
 };
 
 }  // namespace Lib
