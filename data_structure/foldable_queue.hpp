@@ -2,7 +2,20 @@
 
 /*
 半群を入れたqueueについて、全要素の積を計算するデータ構造
-foldable_stack も用意する
+foldable_queue
+push:末尾への追加 償却O(1)
+pop:先頭の削除 償却O(1)
+prod:全要素の積 償却O(1)
+front:先頭の要素 償却O(1)
+verify https://judge.yosupo.jp/submission/170387
+
+半群を入れたstackについて、全要素の積を計算するデータ構造
+foldable_stack
+push: 末尾への追加 O(1)
+pop: 末尾の削除 O(1)
+prod: 全要素の積 O(1)
+top: 末尾の要素 O(1)
+未verify
 */
 namespace Lib {
 template <class S, auto op>
