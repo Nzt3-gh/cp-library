@@ -22,10 +22,10 @@ mergeを行なっていない場合は未定義
 */
 
 namespace Lib {
-struct DSU {
+struct DSU_rollback {
   vector<int> par, sz;
   stack<array<int, 3>> his;
-  DSU(int n) : par(n), sz(n) {
+  DSU_rollback(int n) : par(n), sz(n) {
     fill(par.begin(), par.end(), -1);
     fill(sz.begin(), sz.end(), 1);
   }
