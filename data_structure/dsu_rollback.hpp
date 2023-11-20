@@ -2,8 +2,23 @@
 
 /*
 Disjoint Set Union + Rollback
-merge by size により leader, merge, same, sizeを O(log(N))で行う
-undoにより直前のmergeを O(1)で 取り消す
+
+leader: O(log(N))
+連結成分の代表を得る
+
+merge: O(log(N))
+2つの頂点a,bの属する連結成分を合併する
+
+same; O(log(N))
+2つの頂点a,bが同一の連結成分に属するか判定する
+
+size: O(log(N))
+連結成分の大きさを得る
+
+undo: O(1)
+直前のmergeを取り消す
+mergeを行なっていない場合は未定義
+
 */
 
 namespace Lib{
