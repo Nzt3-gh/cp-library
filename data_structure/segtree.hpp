@@ -1,4 +1,4 @@
-#inlcude"../tamplate/template.hpp"
+#include "../template/template.hpp"
 
 /*
 区間モノイド積を計算するデータ構造
