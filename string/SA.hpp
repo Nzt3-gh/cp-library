@@ -2,7 +2,7 @@
 
 /*
 suffix_array: O(n log^2 n + a n log n)
-Suffix Array を求める
+[0,n]のSuffix Array を求める 先頭要素は必ずnになる(空文字列なので)
 2項の比較演算がO(a)であるときに n log^2 n + an log nである
 
 
