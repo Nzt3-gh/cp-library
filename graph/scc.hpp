@@ -7,8 +7,9 @@ add_edge (v,u): 償却O(1)
 
 scc: 頂点数V 辺数E について O(E+V)
 強連結成分を求める
+トポロジカルソート順に 強連結成分のvector を得る
 
-
+verify https://judge.yosupo.jp/submission/173442
 */
 
 namespace Lib {
