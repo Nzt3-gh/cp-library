@@ -2,6 +2,8 @@
 
 /*
 文字 i を中心とした最長回文の半径を求める
+
+verify: https://judge.yosupo.jp/submission/190202
 */
 
 namespace Lib{
