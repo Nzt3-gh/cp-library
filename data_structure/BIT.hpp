@@ -13,7 +13,7 @@ struct BIT {
   vector<ll> a;
   int sz;
   BIT(int n) : sz(n), a(n + 1) {}
-  void add(int p, int v) {
+  void add(int p, ll v) {
     for (p += 1; p <= sz; p += p & -p) a[p] += v;
   }
   ll sum(int l, int r) {
