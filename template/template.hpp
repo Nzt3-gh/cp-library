@@ -4,4 +4,4 @@
 using namespace std;
 using ll = long long;
 using ull= unsigned long long;
-constexpr int mod=998244353;
+constexpr int MOD=998244353;
