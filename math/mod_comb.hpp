@@ -14,16 +14,16 @@ namespace Lib{
       inv[0]=inv[1]=1;
       invf[0]=invf[1]=1;
       for(int i=2;i<n;i++){
-        fac[i]=fac[i-1]*i%mod;
-        inv[i]=inv[mod%i]*(mod-mod/i)%mod;
-        invf[i]=invf[i-1]*inv[i]%mod;
+        fac[i]=fac[i-1]*i%MOD;
+        inv[i]=inv[MOD%i]*(MOD-MOD/i)%MOD;
+        invf[i]=invf[i-1]*inv[i]%MOD;
       }
     }
     ll comb(int n,int r){
-      return fac[n]*invf[r]%mod*invf[n-r]%mod;
+      return fac[n]*invf[r]%MOD*invf[n-r]%MOD;
     }
     ll perm(int n,int r){
-      return fac[n]*invf[n-r]%mod;
+      return fac[n]*invf[n-r]%MOD;
     }
   };
 }
