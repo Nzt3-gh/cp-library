@@ -1,4 +1,5 @@
 #include"../template/template.hpp"
+#include"../data_structure/dsu.hpp"
 
 /*
 最小全域木
