@@ -5,7 +5,7 @@
 
 MST_edge(vector<edge> E,int N): 辺集合Eと頂点数Nを与えると pair{最小全域森のコスト,最小全域森に含まれる辺のindex列} を返す
 
-verified: https://judge.yosupo.jp/submission/200260
+verify: https://judge.yosupo.jp/submission/200260
 
 
 */
