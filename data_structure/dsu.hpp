@@ -16,12 +16,13 @@ struct DSU {
     if (par[a] == -1) return a;
     return par[a] = leader(par[a]);
   }
-  void merge(int a, int b) {
+  bool merge(int a, int b) {
     a = leader(a), b = leader(b);
-    if (a == b) return;
+    if (a == b) return false;
     if (sz[a] > sz[b]) swap(a, b);
     par[a] = b;
     sz[b] += sz[a];
+    return true;
   }
   bool same(int a, int b) {
     a = leader(a), b = leader(b);

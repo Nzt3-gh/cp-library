@@ -24,7 +24,7 @@ mergeを行なっていない場合は未定義
 namespace Lib {
 struct DSU_rollback {
   vector<int> par, sz;
-  stack<array<int, 3>> his;
+  stack<array<int, 3>,vector<array<int,3>>> his;
   DSU_rollback(int n) : par(n), sz(n) {
     fill(par.begin(), par.end(), -1);
     fill(sz.begin(), sz.end(), 1);
@@ -33,28 +33,30 @@ struct DSU_rollback {
     if (par[a] == -1) return a;
     return leader(par[a]);
   }
-  void merge(int a, int b) {
+  bool merge(int a, int b) {
     a = leader(a), b = leader(b);
     if (a == b) {
       his.push({-1, -1, -1});
-      return;
+      return false;
     }
     if (sz[a] > sz[b]) swap(a, b);
     his.push({a, b, sz[a]});
     par[a] = b;
     sz[b] += sz[a];
+    return true;
   }
   bool same(int a, int b) {
     a = leader(a), b = leader(b);
     return a == b;
   }
-  void undo() {
+  bool undo() {
     auto [c, p, s] = his.top();
-    if (c == -1) return;
     his.pop();
+    if (c == -1) return false;
     par[c] = -1;
     sz[c] = s;
     sz[p] -= s;
+    return true;
   }
   int size(int v) {
     v = leader(v);
