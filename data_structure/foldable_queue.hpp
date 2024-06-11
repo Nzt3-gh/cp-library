@@ -1,13 +1,28 @@
 #include "../template/template.hpp"
 
 /*
-半群を入れたqueueについて、全要素の積を計算するデータ構造
-foldable_queue
-push:末尾への追加 償却O(1)
-pop:先頭の削除 償却O(1)
-prod:全要素の積 償却O(1)
-front:先頭の要素 償却O(1)
+foldable_queue <S,op>
+半群Sを入れたqueueについて、全要素の積opを計算するデータ構造
+push(S): 償却O(1)
+末尾への追加
+pop(): 償却O(1)
+先頭の削除
+prod(): 償却O(1)
+全要素の積
+front(): 償却O(1)
+先頭の要素
 verify https://judge.yosupo.jp/submission/170387
+
+simple_foldable_queue<S,op,e>
+単位元eを持つモノイドSを入れたqueueについて、全要素の積opを計算するデータ構造
+foldable_queueから機能を絞った分メモリを半減 定数倍高速
+push(S): 償却O(1)
+末尾への追加
+pop(): 償却O(1)
+先頭の削除
+prod(): 償却O(1)
+全要素の積
+
 
 半群を入れたstackについて、全要素の積を計算するデータ構造
 foldable_stack
