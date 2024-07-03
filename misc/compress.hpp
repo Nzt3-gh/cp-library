@@ -31,5 +31,8 @@ namespace Lib{
       assert(i>=0&&i<sz);
       return v[i];
     }
+    int size(){
+      return sz;
+    }
   };
 } // namespace Lib
