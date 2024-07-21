@@ -1,3 +1,4 @@
+#include "../template/template.hpp"
 /*
 座標圧縮
 
