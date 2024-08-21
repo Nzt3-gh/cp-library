@@ -9,6 +9,7 @@ e: Sの単位元
 F: 作用の型
 mapping: 作用fのモノイドsへの適用 (f,s)
 composition: 作用fの作用gへの適用
+id: Fの単位作用
 >
 
 prod(l,r): log(n)
