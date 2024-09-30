@@ -16,7 +16,7 @@ max_right<decltype(F)>(L,F): log(n)
 Fは単調とすると
 F(A[L] * A[L+1] * … * A[R-1]) = true となる最大のRを得る
 
-min_left<decltype(F)>(L,F): log(n)
+min_left<decltype(F)>(R,F): log(n)
 Fは単調とすると
 F(A[L] * A[L+1] * … * A[R-1]) = true となる最小のLを得る
 
