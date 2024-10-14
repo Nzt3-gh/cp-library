@@ -52,14 +52,17 @@ pair<vector<int>, vector<int>> lowlink(const vector<vector<int>>& G) {
   return make_pair(ord, low);
 }
 
-vector<array<int,2>> get_bridge(const vector<vector<int>>& G,const vector<int>& ord,const vector<int>& low){
-  vector<array<int,2>>bridge;
-  for(int i=0;i<G.size();i++){
-    for(auto j:G[i]){
-      if(ord[i]<low[j]){
-        bridge.push_back({i,j});
+vector<array<int, 2>> get_bridge(const vector<vector<int>>& G,
+                                 const vector<int>& ord,
+                                 const vector<int>& low) {
+  vector<array<int, 2>> bridge;
+  for (int i = 0; i < G.size(); i++) {
+    for (auto j : G[i]) {
+      if (ord[i] < low[j]) {
+        bridge.push_back({i, j});
       }
     }
   }
+  return bridge;
 }
 }  // namespace Lib
