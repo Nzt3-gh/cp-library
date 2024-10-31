@@ -28,6 +28,7 @@ vector<int> convex_hull(const vector<pll> &XY) {
     auto dx1 = xj - xi, dy1 = yj - yi;
     auto dx2 = xk - xj, dy2 = yk - yj;
     ll det = dx1 * dy2 - dy1 * dx2;
+    // return def >= 0; 辺上の点を含む場合
     return det > 0;
   };
   auto calc = [&]() {
