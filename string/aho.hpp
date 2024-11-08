@@ -5,7 +5,7 @@ Aho-Corasick(英子文字用)
 
 文字列Xを管理し、そのsuffixに検索文字列が含まれるか判定する
 
-void add (string S)
+void add (string)
 検索文字列 S を追加する
 
 void build ()
@@ -14,14 +14,18 @@ void build ()
 void clear()
 内部で管理している文字列を全消去する
 
-(char c)
+void push(char)
 内部の文字列の末尾に文字cを追加する
 
-bool check()
+int check()
 suffixに検索文字列が含まれているか判定
 
-Aho-Corasick(数列用)
-
+Aho-Corasick (hash可能数値型用)
+void add(vector<S>)
+void build()
+void clear()
+void push(S)
+int check()
 */
 namespace Lib {
 struct Aho_lc {
