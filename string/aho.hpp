@@ -31,18 +31,19 @@ namespace Lib {
 struct Aho_lc {
   int X;
   bool init;
-  vector<array<int, 26>> to;
+  static constexpr int sigma = 26;
+  vector<array<int, sigma>> to;
   vector<int> cnt, link;
-  Aho_lc() : cnt(1), to(1), init(0) { rep(i, 26) to[0][i] = -1; }
+  Aho_lc() : cnt(1), to(1), init(0) { rep(i, sigma) to[0][i] = -1; }
   void add(const string &s) {
     int v = 0;
     for (char i : s) {
       i -= 'a';
       if (to[v][i] == -1) {
         to[v][i] = (int)to.size();
-        to.push_back(array<int, 26>());
+        to.push_back(array<int, sigma>());
         cnt.push_back(0);
-        rep(j, 26) to.back()[j] = -1;
+        rep(j, sigma) to.back()[j] = -1;
       }
       v = to[v][i];
     }
@@ -57,7 +58,7 @@ struct Aho_lc {
     while (bfs.size()) {
       int v = bfs.front();
       bfs.pop();
-      rep(i, 26) {
+      rep(i, sigma) {
         int u = to[v][i];
         if (u == -1) continue;
         link[u] = _link_search(link[v], i);
