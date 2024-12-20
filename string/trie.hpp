@@ -64,6 +64,7 @@ struct Trie {
       v = tr[v].to[i];
     }
     tr[v].cnt--;
+    return true;
   }
 };
 }  // namespace Lib
