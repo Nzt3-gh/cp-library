@@ -1,4 +1,4 @@
-#include"../template/template.hpp"
+#include "../template/template.hpp"
 
 /*
 文字列集合を管理する
@@ -33,7 +33,7 @@ struct Trie {
       tr[v].cnt++;
       d++;
       if (!tr[v].to.contains(i)) {
-        tr[v].to[i] = tr.size();
+        tr[v].to[i] = ssize(tr);
         tr.push_back(Node{v, d, 0, {}});
       }
       v = tr[v].to[i];
@@ -44,19 +44,22 @@ struct Trie {
     s += endsymb;
     int v = 0;
     for (auto i : s) {
-      if (!tr[v].to.contains(i)) return tr[v];
+      if (!tr[v].to.contains(i))
+        return tr[v];
       v = tr[v].to[i];
     }
     return tr[v];
   }
   int prefix(string s) {
     int ret = find(s).depth;
-    if (ret > s.size()) ret--;
+    if (ret > ssize(s))
+      ret--;
     return ret;
   }
-  bool contains(string s) { return find(s).depth == (int)s.size() + 1; }
+  bool contains(string s) { return find(s).depth == ssize(s) + 1; }
   bool erase(string s) {
-    if (!contains(s)) return false;
+    if (!contains(s))
+      return false;
     s += endsymb;
     int v = 0;
     for (auto i : s) {
@@ -67,4 +70,4 @@ struct Trie {
     return true;
   }
 };
-}  // namespace Lib
+} // namespace Lib

@@ -1,4 +1,4 @@
-#include"../template/template.hpp"
+#include "../template/template.hpp"
 /*
 遅延セグメント木
 
@@ -31,10 +31,11 @@ struct lazy_segtree {
   int sz, segsize, height;
   lazy_segtree() : lazy_segtree(0) {}
   lazy_segtree(int n) : lazy_segtree(vector<S>(n, e())) {}
-  lazy_segtree(const vector<S>& A) : sz((int)A.size()) {
+  lazy_segtree(const vector<S> &A) : sz(ssize(A)) {
     segsize = 1;
     height = 0;
-    while (sz > segsize) segsize <<= 1, height += 1;
+    while (sz > segsize)
+      segsize <<= 1, height += 1;
     val = vector<S>(2 * segsize, e());
     lazy = vector<F>(2 * segsize, id());
     for (int i = 0; i < sz; i++) {
@@ -46,7 +47,8 @@ struct lazy_segtree {
   }
   void set(int p, S v) {
     p += segsize;
-    for (int i = height; i >= 1; i--) update(p >> i);
+    for (int i = height; i >= 1; i--)
+      update(p >> i);
     val[p] = v;
     for (int i = 1; i <= height; i++) {
       val[p >> i] = op(val[p >> (i + 1)], val[(p >> (i + 1)) + 1]);
@@ -54,9 +56,11 @@ struct lazy_segtree {
   }
   S get(int p) { return prod(p, p + 1); }
   void apply(int L, int R, F f, int k = 1, int btm = 0, int top = -1) {
-    if (top == -1) top = segsize;
+    if (top == -1)
+      top = segsize;
     update(k);
-    if (R <= btm || L >= top) return;
+    if (R <= btm || L >= top)
+      return;
     if (L <= btm && top <= R) {
       lazy[k] = f;
       update(k);
@@ -68,10 +72,13 @@ struct lazy_segtree {
     val[k] = op(val[k * 2], val[k * 2 + 1]);
   }
   S prod(int L, int R, int k = 1, int btm = 0, int top = -1) {
-    if (top == -1) top = segsize;
+    if (top == -1)
+      top = segsize;
     update(k);
-    if (R <= btm || L >= top) return e();
-    if (L <= btm && top <= R) return val[k];
+    if (R <= btm || L >= top)
+      return e();
+    if (L <= btm && top <= R)
+      return val[k];
     int mid = (btm + top) / 2;
     S ret = op(prod(L, R, k * 2, btm, mid), prod(L, R, k * 2 + 1, mid, top));
     val[k] = op(val[k * 2], val[k * 2 + 1]);
@@ -85,9 +92,7 @@ struct lazy_segtree {
     }
     lazy[k] = id();
   }
-  template <class G>
-  void min_left(G f) {}
-  template <class G>
-  void max_right(G f) {}
+  template <class G> void min_left(G f) {}
+  template <class G> void max_right(G f) {}
 };
-}  // namespace Lib
+} // namespace Lib

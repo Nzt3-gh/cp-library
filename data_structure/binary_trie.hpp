@@ -29,12 +29,13 @@ struct binary_trie {
   vector<Node> tr;
   binary_trie() : tr(1) { tr[0] = Node{{-1, -1}, -1, 0}; }
   void insert(ll v) {
-    if (contains(v)) return;
+    if (contains(v))
+      return;
     int idx = 0;
     for (int i = TRIE_LEN - 1; i >= 0; i--) {
       tr[idx].cnt++;
       if (tr[idx].chi[v >> i & 1] == -1) {
-        tr[idx].chi[v >> i & 1] = (int)tr.size();
+        tr[idx].chi[v >> i & 1] = ssize(tr);
         tr.push_back(Node{{-1, -1}, idx, 0});
       }
       idx = tr[idx].chi[v >> i & 1];
@@ -44,13 +45,15 @@ struct binary_trie {
   bool contains(ll v) {
     int idx = 0;
     for (int i = TRIE_LEN; i--;) {
-      if (tr[idx].chi[v >> i & 1] == -1) return false;
+      if (tr[idx].chi[v >> i & 1] == -1)
+        return false;
       idx = tr[idx].chi[v >> i & 1];
     }
     return tr[idx].cnt > 0;
   }
   bool erase(ll v) {
-    if (!contains(v)) return false;
+    if (!contains(v))
+      return false;
     int idx = 0;
     for (int i = TRIE_LEN; i--;) {
       tr[idx].cnt--;
@@ -92,4 +95,4 @@ struct binary_trie {
   }
   int size() { return tr[0].cnt; }
 };
-}  // namespace Lib
+} // namespace Lib

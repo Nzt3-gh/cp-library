@@ -1,4 +1,4 @@
-#include"../data_structure/dsu_rollback.hpp"
+#include "../data_structure/dsu_rollback.hpp"
 
 /*
 辺の追加/削除を行い、2頂点の連結性クエリと連結成分数クエリに答える
@@ -30,29 +30,35 @@ struct offline_dynamic_connectivity {
   int n;
   offline_dynamic_connectivity(int _n) : n(_n), uf(_n) {}
   void merge(int a, int b) {
-    if (a > b) swap(a, b);
+    if (a > b)
+      swap(a, b);
     query.push_back({0, a, b});
   }
   void remove(int a, int b) {
-    if (a > b) swap(a, b);
+    if (a > b)
+      swap(a, b);
     query.push_back({1, a, b});
   }
   void connectivity(int a, int b) {
-    if (a > b) swap(a, b);
+    if (a > b)
+      swap(a, b);
     query.push_back({2, a, b});
   }
   void num_of_components() { query.push_back({3, 0, 0}); }
   vector<int> execute() {
-    int segsize = 1, q = query.size();
-    while (segsize < q) segsize <<= 1;
+    int segsize = 1, q = ssize(query);
+    while (segsize < q)
+      segsize <<= 1;
     vector es(segsize * 2, vector(0, array<int, 2>()));
     map<array<int, 2>, int> edge_time, edge_cnt;
     auto add_edge = [&segsize](array<int, 2> e, int L, int R,
-                               vector<vector<array<int, 2>>>& es) {
+                               vector<vector<array<int, 2>>> &es) {
       int l = L + segsize, r = R + segsize;
       while (l < r) {
-        if (l % 2) es[l++].push_back(e);
-        if (r % 2) es[--r].push_back(e);
+        if (l % 2)
+          es[l++].push_back(e);
+        if (r % 2)
+          es[--r].push_back(e);
         l /= 2, r /= 2;
       }
     };
@@ -65,7 +71,8 @@ struct offline_dynamic_connectivity {
         }
         edge_cnt[e] += 1;
       } else if (t == 1) {
-        if (edge_cnt[e] <= 0) continue;
+        if (edge_cnt[e] <= 0)
+          continue;
         edge_cnt[e] -= 1;
         if (edge_cnt[e] == 0) {
           add_edge(e, edge_time[e], i, es);
@@ -74,7 +81,8 @@ struct offline_dynamic_connectivity {
       }
     }
     for (auto [e, c] : edge_time) {
-      if (c == -1) continue;
+      if (c == -1)
+        continue;
       add_edge(e, c, q + 1, es);
     }
     stack<int, vector<int>> dfs;
@@ -87,7 +95,8 @@ struct offline_dynamic_connectivity {
       dfs.pop();
       if (v >= segsize) {
         for (auto e : es[v]) {
-          if (uf.merge(e[0], e[1])) c_num -= 1;
+          if (uf.merge(e[0], e[1]))
+            c_num -= 1;
         }
         if (v - segsize < q) {
           int v2 = v - segsize;
@@ -97,23 +106,25 @@ struct offline_dynamic_connectivity {
             ret.push_back(c_num);
           }
         }
-        for (int i = 0; i < (int)es[v].size(); i++) {
-          if (uf.undo()) c_num += 1;
+        for (int i = 0; i < ssize(es[v]); i++) {
+          if (uf.undo())
+            c_num += 1;
         }
         continue;
       }
       if (dfs_d[v] == -1) {
         for (auto e : es[v]) {
-          if (uf.merge(e[0], e[1])) c_num -= 1;
+          if (uf.merge(e[0], e[1]))
+            c_num -= 1;
         }
       }
-      for (int& i = ++dfs_d[v]; i < 2; i++) {
+      for (int &i = ++dfs_d[v]; i < 2; i++) {
         dfs.push(v);
         dfs.push(v * 2 + i);
         break;
       }
       if (dfs_d[v] == 2) {
-        for (int i = 0; i < (int)es[v].size(); i++) {
+        for (int i = 0; i < ssize(es[v]); i++) {
           if (uf.undo()) {
             c_num += 1;
           }
@@ -123,4 +134,4 @@ struct offline_dynamic_connectivity {
     return ret;
   }
 };
-}  // namespace Lib
+} // namespace Lib

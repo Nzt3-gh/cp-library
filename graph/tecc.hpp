@@ -14,25 +14,26 @@ LCには 非単純グラフの問題がありますが、このライブラリ�
 
 */
 namespace Lib {
-pair<vector<int>, vector<int>> lowlink(const vector<vector<int>>& G) {
-  int N = G.size();
+pair<vector<int>, vector<int>> lowlink(const vector<vector<int>> &G) {
+  int N = ssize(G);
   vector vst(N, false);
   vector wE(N, 0), d(N, 0);
   for (int i = 0; i < N; i++) {
-    d[i] = G[i].size();
+    d[i] = ssize(G[i]);
   }
   vector ord(N, 0), low(N, N + 1), p(N, -1);
   int cntord = 0;
   for (int i = 0; i < N; i++) {
-    if (vst[i]) continue;
+    if (vst[i])
+      continue;
     ord[i] = cntord++;
     vst[i] = 1;
     vector dfs(0, 0);
     dfs.push_back(i);
-    while (dfs.size()) {
+    while (!dfs.empty()) {
       int v = dfs.back();
       dfs.pop_back();
-      for (int& j = wE[v]; j < d[v]; j++) {
+      for (int &j = wE[v]; j < d[v]; j++) {
         if (!vst[G[v][j]]) {
           ord[G[v][j]] = cntord++;
           p[G[v][j]] = v;
@@ -52,11 +53,11 @@ pair<vector<int>, vector<int>> lowlink(const vector<vector<int>>& G) {
   return make_pair(ord, low);
 }
 
-vector<array<int, 2>> get_bridge(const vector<vector<int>>& G,
-                                 const vector<int>& ord,
-                                 const vector<int>& low) {
+vector<array<int, 2>> get_bridge(const vector<vector<int>> &G,
+                                 const vector<int> &ord,
+                                 const vector<int> &low) {
   vector<array<int, 2>> bridge;
-  for (int i = 0; i < G.size(); i++) {
+  for (int i = 0; i < ssize(G); i++) {
     for (auto j : G[i]) {
       if (ord[i] < low[j]) {
         bridge.push_back({i, j});
@@ -65,4 +66,4 @@ vector<array<int, 2>> get_bridge(const vector<vector<int>>& G,
   }
   return bridge;
 }
-}  // namespace Lib
+} // namespace Lib

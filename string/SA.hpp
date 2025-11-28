@@ -1,4 +1,4 @@
-#include"../template/template.hpp"
+#include "../template/template.hpp"
 
 /*
 suffix_array: O(n log^2 n + a n log n)
@@ -14,20 +14,21 @@ verify https://atcoder.jp/contests/practice2/submissions/47840592
 
 */
 namespace Lib {
-template <class T>
-vector<int> suffix_array(const vector<T>& s) {
-  int n = s.size();
+template <class T> vector<int> suffix_array(const vector<T> &s) {
+  int n = ssize(s);
   vector<int> idx(n), sa(n + 1), rnk(n + 1, -1), tmp(n + 1);
   iota(idx.begin(), idx.end(), 0);
   sort(idx.begin(), idx.end(), [&](int l, int r) { return s[l] < s[r]; });
   for (int i = 0, t = 0; i < n; i++, t++) {
-    if (i > 0 && s[idx[i - 1]] == s[idx[i]]) --t;
+    if (i > 0 && s[idx[i - 1]] == s[idx[i]])
+      --t;
     rnk[idx[i]] = t;
   }
   iota(sa.begin(), sa.end(), 0);
   for (int k = 1; k <= n; k *= 2) {
     auto comp = [&](int l, int r) {
-      if (rnk[l] != rnk[r]) return rnk[l] < rnk[r];
+      if (rnk[l] != rnk[r])
+        return rnk[l] < rnk[r];
       int l2 = l + k <= n ? rnk[l + k] : -1, r2 = r + k <= n ? rnk[r + k] : -1;
       return l2 < r2;
     };
@@ -42,13 +43,14 @@ vector<int> suffix_array(const vector<T>& s) {
 }
 
 template <class T>
-vector<int> lcp_array(const vector<T>& s, const vector<int>& sa) {
-  int n = s.size();
+vector<int> lcp_array(const vector<T> &s, const vector<int> &sa) {
+  int n = ssize(s);
   vector<int> a(n), idx(n);
   iota(idx.begin(), idx.end(), 0);
   sort(idx.begin(), idx.end(), [&](int l, int r) { return s[l] < s[r]; });
   for (int i = 0, t = 0; i < n; i++, t++) {
-    if (i > 0 && s[idx[i - 1]] == s[idx[i]]) --t;
+    if (i > 0 && s[idx[i - 1]] == s[idx[i]])
+      --t;
     a[idx[i]] = t;
   }
   vector<int> rnk(n + 1);
@@ -59,12 +61,14 @@ vector<int> lcp_array(const vector<T>& s, const vector<int>& sa) {
   vector<int> lcp(n);
   for (int i = 0; i < n; i++) {
     int j = sa[rnk[i] - 1];
-    if (h > 0) h--;
+    if (h > 0)
+      h--;
     for (; i + h < n && j + h < n; h++) {
-      if (a[j + h] != a[i + h]) break;
+      if (a[j + h] != a[i + h])
+        break;
     }
     lcp[rnk[i] - 1] = h;
   }
   return lcp;
 }
-}  // namespace Lib
+} // namespace Lib

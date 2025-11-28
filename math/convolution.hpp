@@ -13,11 +13,12 @@ A,B を畳み込んだ数列 C を返す
 複素数でFFTを行う
 */
 namespace Lib {
-void butterfly(vector<ll>& a) {
+void butterfly(vector<ll> &a) {
   ll g = 3;
   ll sum_e[30];
-  int n = a.size(), h = 1;
-  while ((1 << h) < n) h++;
+  int n = ssize(a), h = 1;
+  while ((1 << h) < n)
+    h++;
   assert(h < 23);
   {
     ll es[30], ies[30];
@@ -46,16 +47,18 @@ void butterfly(vector<ll>& a) {
         a[i + offset + p] = ((l - r) % MOD + MOD) % MOD;
       }
       int t = 0;
-      while (((~(unsigned int)(s)) & (1 << t)) == 0) t++;
+      while (((~(unsigned int)(s)) & (1 << t)) == 0)
+        t++;
       now = now * sum_e[t] % MOD;
     }
   }
 }
-void butterfly_inv(vector<ll>& a) {
+void butterfly_inv(vector<ll> &a) {
   ll g = 3;
   ll sum_ie[30];
-  int n = a.size(), h = 1;
-  while ((1 << h) < n) h++;
+  int n = ssize(a), h = 1;
+  while ((1 << h) < n)
+    h++;
   assert(h < 23);
   {
     ll es[30], ies[30];
@@ -84,15 +87,17 @@ void butterfly_inv(vector<ll>& a) {
         a[i + offset + p] = (((l - r) % MOD + MOD) % MOD * inow) % MOD;
       }
       int t = 0;
-      while (((~(unsigned int)(s)) & (1 << t)) == 0) t++;
+      while (((~(unsigned int)(s)) & (1 << t)) == 0)
+        t++;
       inow = inow * sum_ie[t] % MOD;
     }
   }
 }
 vector<ll> convolution(vector<ll> a, vector<ll> b) {
-  int n = a.size(), m = b.size();
+  int n = ssize(a), m = ssize(b);
   int z = 1;
-  while (z <= n + m - 1) z <<= 1;
+  while (z <= n + m - 1)
+    z <<= 1;
   a.resize(z);
   butterfly(a);
   b.resize(z);
@@ -104,4 +109,4 @@ vector<ll> convolution(vector<ll> a, vector<ll> b) {
   rep(i, n + m - 1) a[i] = a[i] * iz % MOD;
   return a;
 }
-}  // namespace Lib
+} // namespace Lib

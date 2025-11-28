@@ -33,8 +33,7 @@ top: 末尾の要素 O(1)
 未verify
 */
 namespace Lib {
-template <class S, auto op>
-struct foldable_stack {
+template <class S, auto op> struct foldable_stack {
   static_assert(is_convertible_v<decltype(op), function<S(S, S)>>);
   vector<S> stack_V, stack_P;
   foldable_stack() : stack_V(0), stack_P(0) {}
@@ -63,8 +62,7 @@ struct foldable_stack {
   size_t size() { return stack_V.size(); }
 };
 
-template <class S, auto op>
-struct foldable_queue {
+template <class S, auto op> struct foldable_queue {
   static_assert(is_convertible_v<decltype(op), function<S(S, S)>>);
   vector<S> f_st_V, f_st_P, b_st_V, b_st_P;
   foldable_queue() : f_st_V(0), f_st_P(0), b_st_V(0), b_st_P(0) {}
@@ -116,8 +114,7 @@ struct foldable_queue {
   size_t size() { return f_st_P.size() + b_st_P.size(); }
 };
 
-template <class S, auto op, auto e>
-struct simple_foldable_queue {
+template <class S, auto op, auto e> struct simple_foldable_queue {
   static_assert(is_convertible_v<decltype(op), function<S(S, S)>>);
   vector<S> f_P, b_V;
   S b_P;
@@ -132,7 +129,7 @@ struct simple_foldable_queue {
       f_P.push_back(b_V.back());
       b_V.pop_back();
     }
-    for (int i = 1; i < (int)f_P.size(); i++) {
+    for (int i = 1; i < ssize(f_P); i++) {
       f_P[i] = op(f_P[i], f_P[i - 1]);
     }
     b_P = e();
@@ -153,4 +150,4 @@ struct simple_foldable_queue {
   }
   size_t size() { return f_P.size() + b_V.size(); }
 };
-}  // namespace Lib
+} // namespace Lib

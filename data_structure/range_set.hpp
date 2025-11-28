@@ -27,8 +27,10 @@ struct range_set {
       auto it = intervals.upper_bound(all2({l, pinf}));
       if (it != intervals.begin()) {
         it--;
-        if ((*it)[1] >= r) return 0;
-        if ((*it)[1] >= l) l = (*it)[0];
+        if ((*it)[1] >= r)
+          return 0;
+        if ((*it)[1] >= l)
+          l = (*it)[0];
       }
     }
     auto it = intervals.lower_bound(all2({l, minf}));
@@ -95,4 +97,4 @@ struct range_set {
     return make_pair(false, all2({0, 0}));
   }
 };
-}  // namespace Lib
+} // namespace Lib

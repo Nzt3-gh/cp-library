@@ -15,7 +15,7 @@ namespace Lib {
 pair<ll, ll> crt(vector<ll> r, vector<ll> m) {
   assert(r.size() == m.size());
   ll ret_r = r[0], ret_m = m[0];
-  int n = r.size();
+  int n = ssize(r);
   for (int i = 1; i < n; i++) {
     ll x = 0, y = 0, d = extGCD(ret_m, m[i], x, y);
     if ((ret_r - r[i]) % d != 0) {
@@ -25,9 +25,11 @@ pair<ll, ll> crt(vector<ll> r, vector<ll> m) {
     ret_r += tmp * ret_m;
     ret_m *= m[i] / d;
     ret_r %= ret_m;
-    if (ret_r < 0) ret_r += ret_m;
+    if (ret_r < 0)
+      ret_r += ret_m;
   }
-  if (ret_r < 0) ret_r += ret_m;
+  if (ret_r < 0)
+    ret_r += ret_m;
   return make_pair(ret_r, ret_m);
 }
 
@@ -53,7 +55,8 @@ pair<ll, ll> crt_mod(vector<ll> r, vector<ll> m, ll MOD) {
   vector cef(n + 1, 1ll), con(n + 1, 0ll);
   for (int i = 0; i < n; i++) {
     ll t = (r[i] - con[i]) * modinv(cef[i], m[i]) % m[i];
-    if (t < 0) t += m[i];
+    if (t < 0)
+      t += m[i];
     for (int j = i + 1; j <= n; j++) {
       con[j] += cef[j] * t;
       con[j] %= m[j];
@@ -62,4 +65,4 @@ pair<ll, ll> crt_mod(vector<ll> r, vector<ll> m, ll MOD) {
   }
   return make_pair(con[n], cef[n]);
 }
-}  // namespace Lib
+} // namespace Lib

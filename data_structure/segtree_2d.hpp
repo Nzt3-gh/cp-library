@@ -14,15 +14,16 @@ prod(h1,w1,h2,w2): O(log h log W)
 (h1,w1)を左上、(h2,w2)を右下とする矩形領域 [h1,h2) * [w1,w2) の積を計算する
 */
 namespace Lib {
-template <class S, auto op, auto e>
-struct segtree_2d {
+template <class S, auto op, auto e> struct segtree_2d {
   vector<S> seg;
   int _h, _w, sh, sw;
   segtree_2d(int h, int w) {
     sh = 1, sw = 1;
     _h = h, _w = w;
-    while (sh < h) sh <<= 1;
-    while (sw < w) sw <<= 1;
+    while (sh < h)
+      sh <<= 1;
+    while (sw < w)
+      sw <<= 1;
     seg = vector<S>(4 * sh * sw, e());
   }
   int idx(int h, int w) {
@@ -48,8 +49,10 @@ struct segtree_2d {
   S _inner_prod(int k, int l, int r) {
     S retL = e(), retR = e();
     for (l += sw, r += sw; l < r; l /= 2, r /= 2) {
-      if (l % 2) retL = op(retL, seg[idx(k, l++)]);
-      if (r % 2) retR = op(seg[idx(k, --r)], retR);
+      if (l % 2)
+        retL = op(retL, seg[idx(k, l++)]);
+      if (r % 2)
+        retR = op(seg[idx(k, --r)], retR);
     }
     return op(retL, retR);
   }
@@ -60,10 +63,12 @@ struct segtree_2d {
     assert(w2 >= w1 && w2 <= _w);
     S retU = e(), retD = e();
     for (h1 += sh, h2 += sh; h1 < h2; h1 /= 2, h2 /= 2) {
-      if (h1 % 2) retU = op(retU, _inner_prod(h1++, w1, w2));
-      if (h2 % 2) retD = op(_inner_prod(--h2, w1, w2), retD);
+      if (h1 % 2)
+        retU = op(retU, _inner_prod(h1++, w1, w2));
+      if (h2 % 2)
+        retD = op(_inner_prod(--h2, w1, w2), retD);
     }
     return op(retU, retD);
   }
 };
-}  // namespace Lib
+} // namespace Lib

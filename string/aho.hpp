@@ -1,4 +1,4 @@
-#include"../template/template.hpp"
+#include "../template/template.hpp"
 
 /*
 Aho-Corasick(英子文字用)
@@ -40,7 +40,7 @@ struct Aho_lc {
     for (char i : s) {
       i -= 'a';
       if (to[v][i] == -1) {
-        to[v][i] = (int)to.size();
+        to[v][i] = ssize(to);
         to.push_back(array<int, sigma>());
         cnt.push_back(0);
         rep(j, sigma) to.back()[j] = -1;
@@ -52,15 +52,16 @@ struct Aho_lc {
   void build() {
     assert(!init);
     init = 1;
-    link.assign(to.size(), -1);
+    link.assign(ssize(to), -1);
     queue<int> bfs;
     bfs.push(0);
-    while (bfs.size()) {
+    while (!bfs.empty()) {
       int v = bfs.front();
       bfs.pop();
       rep(i, sigma) {
         int u = to[v][i];
-        if (u == -1) continue;
+        if (u == -1)
+          continue;
         link[u] = _link_search(link[v], i);
         cnt[u] += cnt[link[u]];
         bfs.push(u);
@@ -70,28 +71,30 @@ struct Aho_lc {
   }
   int _link_search(int v, int c) {
     while (v != -1) {
-      if (to[v][c] != -1) return to[v][c];
+      if (to[v][c] != -1)
+        return to[v][c];
       v = link[v];
     }
     return 0;
   }
   void push(char c) {
     c -= 'a';
-    while(X!=-1){
-      if (to[X][c] == -1) X = link[X];
-      else{
+    while (X != -1) {
+      if (to[X][c] == -1)
+        X = link[X];
+      else {
         X = to[X][c];
         break;
       }
     }
-    if (X < 0) X = 0;
+    if (X < 0)
+      X = 0;
   }
   void clear() { X = 0; }
   int check() { return cnt[X]; }
 };
 
-template <class S>
-struct Aho {
+template <class S> struct Aho {
   int X;
   bool init;
   using ump = unordered_map<S, int>;
@@ -102,7 +105,7 @@ struct Aho {
     int v = 0;
     for (S i : s) {
       if (!to[v].contains(i)) {
-        to[v][i] = (int)to.size();
+        to[v][i] = ssize(to);
         to.push_back(ump());
         cnt.push_back(0);
       }
@@ -113,10 +116,10 @@ struct Aho {
   void build() {
     assert(!init);
     init = 1;
-    link.assign(to.size(), -1);
+    link.assign(ssize(to), -1);
     queue<int> bfs;
     bfs.push(0);
-    while (bfs.size()) {
+    while (!bfs.empty()) {
       int v = bfs.front();
       bfs.pop();
       for (auto [k, u] : to[v]) {
@@ -129,7 +132,8 @@ struct Aho {
   }
   int _link_search(int v, S c) {
     while (v != -1) {
-      if (to[v].contains(c)) return to[v][c];
+      if (to[v].contains(c))
+        return to[v][c];
       v = link[v];
     }
     return 0;
@@ -143,9 +147,10 @@ struct Aho {
         break;
       }
     }
-    if (X < 0) X = 0;
+    if (X < 0)
+      X = 0;
   }
   void clear() { X = 0; }
   int check() { return cnt[X]; }
 };
-}  // namespace Lib
+} // namespace Lib

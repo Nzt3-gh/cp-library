@@ -32,13 +32,14 @@ struct scc_graph {
     }
     vector dfs(0, 0), e_idx(sz, 0), l(0, 0);
     for (int i = 0; i < sz; i++) {
-      if (visited[i]) continue;
+      if (visited[i])
+        continue;
       visited[i] = 1;
       dfs.push_back(i);
       while (!dfs.empty()) {
         int v = dfs.back();
         dfs.pop_back();
-        for (int &j = e_idx[v]; j < g[v].size(); j++) {
+        for (int &j = e_idx[v]; j < ssize(g[v]); j++) {
           if (!visited[g[v][j]]) {
             dfs.push_back(v);
             dfs.push_back(g[v][j]);
@@ -46,7 +47,7 @@ struct scc_graph {
             break;
           }
         }
-        if (e_idx[v] == g[v].size()) {
+        if (e_idx[v] == ssize(g[v])) {
           l.push_back(v);
         }
       }
@@ -56,14 +57,15 @@ struct scc_graph {
     reverse(l.begin(), l.end());
     vector ret(0, vector(0, 0));
     for (int i : l) {
-      if (visited[i]) continue;
+      if (visited[i])
+        continue;
       visited[i] = 1;
       dfs.push_back(i);
       ret.push_back(vector(0, 0));
       while (!dfs.empty()) {
         int v = dfs.back();
         dfs.pop_back();
-        for (int &j = e_idx[v]; j < rev_g[v].size(); j++) {
+        for (int &j = e_idx[v]; j < ssize(rev_g[v]); j++) {
           if (!visited[rev_g[v][j]]) {
             dfs.push_back(v);
             dfs.push_back(rev_g[v][j]);
@@ -71,7 +73,7 @@ struct scc_graph {
             break;
           }
         }
-        if (e_idx[v] == rev_g[v].size()) {
+        if (e_idx[v] == ssize(rev_g[v])) {
           ret.back().push_back(v);
         }
       }
@@ -79,4 +81,4 @@ struct scc_graph {
     return ret;
   }
 };
-}  // namespace Lib
+} // namespace Lib
